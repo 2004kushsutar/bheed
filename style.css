@@ -1,0 +1,124 @@
+/* --- GLOBAL FONTS & RESET --- */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #111827; /* Gray-900 backup */
+}
+
+/* --- TIMER (Digital Look) --- */
+.timer {
+  font-family: "Orbitron", sans-serif;
+  color: #fde047; /* yellow-300 */
+  text-shadow: 0 0 5px #facc15; /* yellow-400 glow */
+  background: rgba(0, 0, 0, 0.9);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(253, 224, 71, 0.3);
+  font-size: 1.25rem;
+  min-width: 40px;
+  text-align: center;
+  z-index: 50; /* Ensure it stays on top */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* --- TRAFFIC LIGHTS --- */
+.traffic-light-post {
+  background-color: #1f2937; /* Gray-800 */
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid #4b5563;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.6);
+  z-index: 40;
+}
+
+.light {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #374151; /* Gray-700 (Off state) */
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 2px solid #111827; /* Dark ring */
+}
+
+/* Active States (Glow Effects) */
+.light.red.active {
+  background-color: #ef4444;
+  box-shadow: 0 0 25px 8px rgba(239, 68, 68, 0.7);
+}
+.light.yellow.active {
+  background-color: #facc15;
+  box-shadow: 0 0 25px 8px rgba(250, 204, 21, 0.7);
+}
+.light.green.active {
+  background-color: #22c55e;
+  box-shadow: 0 0 25px 8px rgba(34, 197, 94, 0.7);
+}
+
+/* --- ROAD LABELS (Vehicle Counts) --- */
+.road-label {
+  font-family: "Orbitron", sans-serif;
+  color: #93c5fd; /* blue-300 */
+  font-size: 0.9rem;
+  background-color: rgba(17, 24, 39, 0.95);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #3b82f6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  pointer-events: none; /* Let clicks pass through */
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --- NEW SLIDERS (Volume Bars) --- */
+/* Removes default browser styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 14px; /* Thicker for better visibility */
+  background: #1f2937; /* Dark background */
+  border-radius: 10px;
+  outline: none;
+  overflow: hidden; /* Essential for the 'fill' hack */
+  cursor: default; /* Indicates read-only */
+  border: 1px solid #374151;
+}
+
+/* The Thumb (Hidden, but used for the shadow fill) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0px; /* Hide the knob */
+  height: 0px;
+  /* This giant shadow creates the "fill" bar to the left of the thumb */
+  box-shadow: -100vw 0 0 100vw #3b82f6; 
+  transition: box-shadow 0.3s ease; /* Smooth color transition */
+}
+
+/* --- DYNAMIC COLOR CODING CLASSES --- */
+/* Green Bar (Low Traffic) */
+input[type="range"].low::-webkit-slider-thumb {
+  box-shadow: -100vw 0 0 100vw #22c55e; 
+}
+
+/* Yellow Bar (Medium Traffic) */
+input[type="range"].medium::-webkit-slider-thumb {
+  box-shadow: -100vw 0 0 100vw #eab308; 
+}
+
+/* Red Bar (High Traffic) */
+input[type="range"].high::-webkit-slider-thumb {
+  box-shadow: -100vw 0 0 100vw #ef4444; 
+}
+
+/* Firefox Support (Just in case) */
+input[type="range"]::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: 0;
+  box-shadow: -100vw 0 0 100vw #3b82f6;
+}
+input[type="range"]::-moz-range-track {
+  background-color: #1f2937;
+}
